@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Create random, rhyme-based pseudo lyrics with a simple syllable generator."
+    />
+    <title>Pseudo Music Text Generator</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="page-header">
+        <p class="eyebrow">A small random lyric generator</p>
+        <h1>Pseudo Music Text Generator</h1>
+        <p class="intro">
+          Make playful, rhyme-based lyrics from invented English-like words.
+        </p>
+      </header>
+
+      <form class="controls" id="generatorForm">
+        <label class="field" for="verseCount">
+          <span>Number of verses</span>
+          <input id="verseCount" name="verseCount" type="number" min="1" max="20" value="3" required />
+        </label>
+
+        <label class="field" for="lineCount">
+          <span>Lines per section</span>
+          <input id="lineCount" name="lineCount" type="number" min="1" max="20" value="6" required />
+        </label>
+
+        <label class="field" for="outroLineCount">
+          <span>Outro lines</span>
+          <input id="outroLineCount" name="outroLineCount" type="number" min="1" max="20" value="2" required />
+        </label>
+
+        <label class="field" for="syllableCount">
+          <span>Syllables per line</span>
+          <input id="syllableCount" name="syllableCount" type="number" min="1" max="60" value="12" required />
+        </label>
+
+        <button class="generate-button" type="submit">Generate lyrics</button>
+      </form>
+
+      <section class="output-section" aria-labelledby="outputHeading">
+        <div class="output-heading-row">
+          <h2 id="outputHeading">Your song</h2>
+          <button class="copy-button" id="copyButton" type="button" disabled>Copy lyrics</button>
+        </div>
+        <textarea
+          id="lyricsOutput"
+          aria-label="Generated song lyrics"
+          placeholder="Your generated lyrics will appear here."
+          readonly
+          spellcheck="false"
+        ></textarea>
+        <p class="status" id="statusMessage" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+  </body>
+</html>
