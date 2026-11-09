@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="system">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,11 +14,21 @@
   <body>
     <main class="app-shell">
       <header class="page-header">
-        <p class="eyebrow">A small random lyric generator</p>
-        <h1>Pseudo Music Text Generator</h1>
-        <p class="intro">
-          Make playful, rhyme-based lyrics from invented English-like words.
-        </p>
+        <div class="header-copy">
+          <p class="eyebrow">A small random lyric generator</p>
+          <h1>Pseudo Music Text Generator</h1>
+          <p class="intro">
+            Make playful, rhyme-based lyrics from invented English-like words.
+          </p>
+        </div>
+        <label class="theme-control" for="themeMode">
+          <span>Theme</span>
+          <select id="themeMode" name="themeMode">
+            <option value="system">System</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </label>
       </header>
 
       <form class="controls" id="generatorForm">

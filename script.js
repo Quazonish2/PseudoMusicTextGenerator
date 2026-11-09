@@ -19,6 +19,7 @@ const openRimes = ["a", "e", "i", "o", "u", "ay", "ea", "ee", "oa", "oo", "ow", 
 const finalRimes = ["an", "en", "on", "in", "er", "ar", "or", "el", "ell", "et", "at", "it", "ad", "ed", "am", "em", "ash", "ant", "ale", "ane", "ake", "ate", "ore", "ole", "one", "ice", "ine", "ide", "air", "ear", "own", "out", "ace", "age", "ike", "ile", "ire", "ite", "oke", "ose", "eal", "ood", "oon", "oom"];
 
 const form = document.querySelector("#generatorForm");
+const themeModeSelect = document.querySelector("#themeMode");
 const verseCountInput = document.querySelector("#verseCount");
 const lineCountInput = document.querySelector("#lineCount");
 const outroLineCountInput = document.querySelector("#outroLineCount");
@@ -26,6 +27,28 @@ const syllableCountInput = document.querySelector("#syllableCount");
 const lyricsOutput = document.querySelector("#lyricsOutput");
 const copyButton = document.querySelector("#copyButton");
 const statusMessage = document.querySelector("#statusMessage");
+const themeModes = ["system", "light", "dark"];
+
+function getSavedTheme() {
+  try {
+    const savedTheme = localStorage.getItem("pseudoMusicTheme");
+    return themeModes.includes(savedTheme) ? savedTheme : "system";
+  } catch {
+    return "system";
+  }
+}
+
+function setTheme(theme) {
+  const selectedTheme = themeModes.includes(theme) ? theme : "system";
+  document.documentElement.dataset.theme = selectedTheme;
+  themeModeSelect.value = selectedTheme;
+
+  try {
+    localStorage.setItem("pseudoMusicTheme", selectedTheme);
+  } catch {
+    // The selected theme still applies for this page even if storage is unavailable.
+  }
+}
 
 function pick(items) {
   return items[randint(0, items.length - 1)];
@@ -359,6 +382,10 @@ form.addEventListener("submit", (event) => {
   generateLyrics();
 });
 
+themeModeSelect.addEventListener("change", () => {
+  setTheme(themeModeSelect.value);
+});
+
 copyButton.addEventListener("click", async () => {
   try {
     await navigator.clipboard.writeText(lyricsOutput.value);
@@ -371,4 +398,5 @@ copyButton.addEventListener("click", async () => {
   }
 });
 
+setTheme(getSavedTheme());
 generateLyrics();
